@@ -30,7 +30,6 @@ pub async fn send_support_email(to_email: &str, subject: &str, body: &str) {
 
 pub async fn send_no_reply_email(to_email: &str, subject: &str, body: &str) {
 
-	debug!("Sending no_reply_email to {}", to_email);
 	let email = Message::builder()
 		.from(format!("<{}>", settings::get_setting("no_reply_email_username")).parse().unwrap())
 		.to(format!("<{}>", to_email).parse().unwrap())
@@ -74,14 +73,5 @@ pub async fn send_alert(subject: &str, body: &str) {
 		Ok(_) => {},
 		Err(e) => panic!("Could not send email: {:?}", e),
 	}
-
-}
-
-
-#[test]
-fn test_email() {
-
-	send_support_email("littledaisyphysics1@gmail.com", "Random Subject", "Random Body");
-	send_no_reply_email("littledaisyphysics1@gmail.com", "No Reply Subject", "No Reply Body");
 
 }
