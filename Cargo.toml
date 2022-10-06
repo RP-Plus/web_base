@@ -1,0 +1,20 @@
+[package]
+name = "web_base"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+#settings
+lazy_static = "1.4.0"
+config = "0.11"
+
+# aws_s3
+tokio = { version = "1", features = ["full"] }
+rust-s3 = "0.28.1"
+anyhow = "1.0"
+
+#mailer
+lettre = { version = "0.10.0-rc.4", features = ["tokio1", "tokio1-native-tls"] }
