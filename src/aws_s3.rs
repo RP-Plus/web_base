@@ -15,9 +15,9 @@ impl Space {
 
     pub fn new() -> Space {
 
-        let bucket_name = settings::get_setting("bucket_prefix");
-        let region      = Region::Custom { region: "us-east-1".to_string(), endpoint: settings::get_setting("storage_endpoint") };
-        let credentials = Credentials::new(Some(&settings::get_setting("storage_key")), Some(&settings::get_setting("storage_secret")), None, None, None).unwrap();
+        let bucket_name = settings::get("bucket_prefix");
+        let region      = Region::Custom { region: "us-east-1".to_string(), endpoint: settings::get("storage_endpoint") };
+        let credentials = Credentials::new(Some(&settings::get("storage_key")), Some(&settings::get("storage_secret")), None, None, None).unwrap();
         let mut bucket  = Bucket::new(&bucket_name, region, credentials).unwrap();
 
         bucket.add_header("x-amz-acl", "public-read");
@@ -59,7 +59,7 @@ pub fn get_full_path_storage(relative_path: Option<String>) -> Option<String> {
     match relative_path {
 
         Some(relative_path) => {
-            return Some(format!("https://{}.{}{}", settings::get_setting("bucket_prefix"), settings::get_setting("storage_endpoint"), relative_path));
+            return Some(format!("https://{}.{}{}", settings::get("bucket_prefix"), settings::get("storage_endpoint"), relative_path));
         },
         None => None
 

@@ -32,7 +32,7 @@ pub fn get_peppered_argon2(to_hash: &str, salt: &str) -> Vec<u8> {
 
 	let config = Config::default();
 	let mut peppered_with_salt = String::from(salt);
-	peppered_with_salt.push_str(&settings::get_setting("argon2_pepper"));
+	peppered_with_salt.push_str(&settings::get("argon2_pepper"));
 	argon2::hash_raw(to_hash.as_bytes(), peppered_with_salt.as_bytes(), &config).unwrap()
 
 }

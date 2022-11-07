@@ -23,16 +23,15 @@ lazy_static! {
 
 }
 
-fn get_settings() -> &'static config::Config {
+fn get_all() -> &'static config::Config {
 
     &CACHED_SETTINGS
 
 }
 
 
-pub fn get_setting(config_option: &str) -> String {
+pub fn get(config_option: &str) -> String {
 
-    let settings = get_settings();
-    settings.get_str(config_option).unwrap()
+    CACHED_SETTINGS.get_str(config_option).unwrap()
 
 }

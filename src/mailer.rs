@@ -6,16 +6,16 @@ use crate::settings;
 pub async fn send_support_email(to_email: &str, subject: &str, body: &str) {
 
 	let email = Message::builder()
-		.from(format!("<{}>", settings::get_setting("support_email_username")).parse().unwrap())
+		.from(format!("<{}>", settings::get("support_email_username")).parse().unwrap())
 		.to(format!("<{}>", to_email).parse().unwrap())
 		.subject(subject)
 		.body(body.to_string())
 		.unwrap();
 
-	let creds = Credentials::new(settings::get_setting("support_email_username"), settings::get_setting("support_email_password"));
+	let creds = Credentials::new(settings::get("support_email_username"), settings::get("support_email_password"));
 
     let mailer: AsyncSmtpTransport<Tokio1Executor> =
-        AsyncSmtpTransport::<Tokio1Executor>::relay(&settings::get_setting("smtp_mailer"))
+        AsyncSmtpTransport::<Tokio1Executor>::relay(&settings::get("smtp_mailer"))
             .unwrap()
             .credentials(creds)
             .build();
@@ -31,16 +31,16 @@ pub async fn send_support_email(to_email: &str, subject: &str, body: &str) {
 pub async fn send_no_reply_email(to_email: &str, subject: &str, body: &str) {
 
 	let email = Message::builder()
-		.from(format!("<{}>", settings::get_setting("no_reply_email_username")).parse().unwrap())
+		.from(format!("<{}>", settings::get("no_reply_email_username")).parse().unwrap())
 		.to(format!("<{}>", to_email).parse().unwrap())
 		.subject(subject)
 		.body(body.to_string())
 		.unwrap();
 
-	let creds = Credentials::new(settings::get_setting("no_reply_email_username"), settings::get_setting("no_reply_email_password"));
+	let creds = Credentials::new(settings::get("no_reply_email_username"), settings::get("no_reply_email_password"));
 
     let mailer: AsyncSmtpTransport<Tokio1Executor> =
-        AsyncSmtpTransport::<Tokio1Executor>::relay(&settings::get_setting("smtp_mailer"))
+        AsyncSmtpTransport::<Tokio1Executor>::relay(&settings::get("smtp_mailer"))
             .unwrap()
             .credentials(creds)
             .build();
@@ -55,16 +55,16 @@ pub async fn send_no_reply_email(to_email: &str, subject: &str, body: &str) {
 pub async fn send_alert(subject: &str, body: &str) {
 
 	let email = Message::builder()
-		.from(format!("<{}>", settings::get_setting("no_reply_email_username")).parse().unwrap())
-		.to(format!("<{}>", settings::get_setting("alert_email")).parse().unwrap())
+		.from(format!("<{}>", settings::get("no_reply_email_username")).parse().unwrap())
+		.to(format!("<{}>", settings::get("alert_email")).parse().unwrap())
 		.subject(subject)
 		.body(body.to_string())
 		.unwrap();
 
-	let creds = Credentials::new(settings::get_setting("no_reply_email_username"), settings::get_setting("no_reply_email_password"));
+	let creds = Credentials::new(settings::get("no_reply_email_username"), settings::get("no_reply_email_password"));
 
     let mailer: AsyncSmtpTransport<Tokio1Executor> =
-        AsyncSmtpTransport::<Tokio1Executor>::relay(&settings::get_setting("smtp_mailer"))
+        AsyncSmtpTransport::<Tokio1Executor>::relay(&settings::get("smtp_mailer"))
             .unwrap()
             .credentials(creds)
             .build();
