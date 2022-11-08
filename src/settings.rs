@@ -23,7 +23,7 @@ lazy_static! {
 
 }
 
-fn get_all() -> &'static config::Config {
+pub fn get_all() -> &'static config::Config {
 
     &CACHED_SETTINGS
 
