@@ -5,3 +5,4 @@ pub mod aws_s3;
 pub mod hash;
 pub mod mailer;
 pub mod logger;
+pub mod verification;
