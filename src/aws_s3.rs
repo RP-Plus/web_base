@@ -40,14 +40,14 @@ impl Space {
 
     pub async fn get_object(&self, object_path: &str) -> Result<Vec<u8>, anyhow::Error> {
 
-        let (data, _code) = self.bucket.get_object(object_path).await?;
-        Ok(data)
+        let response_data = self.bucket.get_object(object_path).await?;
+        Ok(response_data.into())
 
     }
 
     pub async fn create_object(&self, object_path: &str, object: &[u8]) -> Result<(), anyhow::Error> {
 
-        let (_, _) = self.bucket.put_object(object_path, &object).await?;
+        let _ = self.bucket.put_object(object_path, &object).await?;
         Ok(())
 
     }
