@@ -3,7 +3,7 @@ use rand::Rng;
 use hex;
 use sha2::{Sha256, Digest};
 use argon2::{self, Config};
-use uuid::Uuid;
+use uuid::{Uuid, uuid};
 
 use crate::settings;
 
@@ -80,6 +80,12 @@ pub fn get_random_string(length: i32) -> String {
 
 pub fn get_uuid() -> String {
 
-	Uuid::new_v4().to_simple().to_string()
+	Uuid::new_v4().hyphenated().to_string()
+
+}
+
+pub fn get_uuid_from_str(uuid_str: &str) -> Uuid {
+
+    Uuid::parse_str(uuid_str).unwrap()
 
 }
