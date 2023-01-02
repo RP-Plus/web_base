@@ -11,6 +11,13 @@ pub struct Space {
 
 }
 
+lazy_static! {
+
+    static ref FULL_PATH: String = format!("https://{}.{}", settings::get("bucket_prefix"), settings::get("storage_endpoint"));
+
+}
+
+
 impl Space {
 
     pub fn new() -> Space {
@@ -64,5 +71,11 @@ pub fn get_full_path_storage(relative_path: Option<String>) -> Option<String> {
         None => None
 
     }
+
+}
+
+pub fn get_full_path() -> String {
+
+    FULL_PATH.to_string()
 
 }
