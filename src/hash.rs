@@ -3,7 +3,7 @@ use rand::Rng;
 use hex;
 use sha2::{Sha256, Digest};
 use argon2::{self, Config};
-use uuid::{Uuid, uuid};
+use uuid::{Uuid};
 
 use crate::settings;
 
