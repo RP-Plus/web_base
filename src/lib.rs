@@ -36,6 +36,19 @@ macro_rules! http_br {
 }
 
 #[macro_export]
+macro_rules! http_unauth {
+	($error:expr) => {
+
+		HttpResponse::Unauthorized()
+			.body(json!({
+				"successful": false,
+				"error": $error
+			}).to_string())
+			
+	};
+}
+
+#[macro_export]
 macro_rules! http_ise {
 	($error:expr) => {
 
