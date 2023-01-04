@@ -65,7 +65,7 @@ macro_rules! http_ise {
 macro_rules! http_success {
 	($json_message:expr) => {
 
-		HttpResponse::BadRequest()
+		HttpResponse::Ok()
 			.body(json!({
 				"successful": true,
 				"message": $json_message
