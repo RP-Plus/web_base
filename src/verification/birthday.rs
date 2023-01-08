@@ -20,7 +20,7 @@ impl Birthday {
 	pub fn is_at_least_18(&self) -> bool {
 
 		let temp =  self.converted_birthday.add(Duration::weeks(52*18));
-		let local = Local::now().date().naive_local();
+		let local = Local::now().date_naive();
 
 		return temp < local;
 
