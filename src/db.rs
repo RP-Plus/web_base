@@ -3,7 +3,7 @@
 use tokio;
 use postgres::{Client, NoTls};
 use tokio_postgres;
-use web_base::settings;
+use crate::settings;
 
 pub fn get_connection() -> Result<postgres::Client, postgres::Error> {
 
