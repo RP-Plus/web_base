@@ -8,6 +8,7 @@ pub mod logger;
 pub mod verification;
 pub mod time_utils;
 pub mod db;
+pub mod http_utils;
 
 #[macro_export]
 macro_rules! http_error {
