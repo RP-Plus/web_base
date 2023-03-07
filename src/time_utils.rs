@@ -10,38 +10,76 @@ fn time_format(amount: i64, amount_str: &str) -> String {
 
 }
 
-pub fn get_time_since(timestamp: DateTime<Utc>) -> String {
+pub trait TimeUtils {
+	fn into_time_since(self) -> String;
+	fn into_time_since_short(self) -> String;
+}
 
-	let utc: DateTime<Utc> = Utc::now();
-	let diff = utc - timestamp;
+impl TimeUtils for DateTime<Utc> {
 
-	if diff.num_weeks() > 0 {
+	fn into_time_since(self) -> String {
 
-		if diff.num_weeks() < 52 {
+		let utc: DateTime<Utc> = Utc::now();
+		let diff = utc - self;
 
-			return timestamp.date_naive().to_string();
+		if diff.num_weeks() > 0 {
+
+			if diff.num_weeks() < 52 {
+				return self.date_naive().to_string();
+			} else {
+				return time_format(diff.num_weeks(), "week");
+			}
+
+		} else if diff.num_days() > 0 {
+
+			return time_format(diff.num_days(), "day");
+
+		} else if diff.num_hours() > 0 {
+
+			return time_format(diff.num_hours(), "hour");
+
+		} else if diff.num_minutes() > 0 {
+
+			return time_format(diff.num_minutes(), "minute");
 
 		} else {
 
-			return time_format(diff.num_weeks(), "week");
+			return time_format(diff.num_seconds(), "second");
 
 		}
 
-	} else if diff.num_days() > 0 {
+	}
 
-		return time_format(diff.num_days(), "day");
+	fn into_time_since_short(self) -> String {
 
-	} else if diff.num_hours() > 0 {
+		let utc: DateTime<Utc> = Utc::now();
+		let diff = utc - self;
 
-		return time_format(diff.num_hours(), "hour");
+		if diff.num_weeks() > 0 {
 
-	} else if diff.num_minutes() > 0 {
+			if diff.num_weeks() < 52 {
+				return self.date_naive().to_string();
+			} else {
+				return format!("{}w", diff.num_weeks());
+			}
 
-		return time_format(diff.num_minutes(), "minute");
+		} else if diff.num_days() > 0 {
 
-	} else {
+			return format!("{}d", diff.num_days());
 
-		return time_format(diff.num_seconds(), "second");
+		} else if diff.num_hours() > 0 {
+
+			return format!("{}h", diff.num_hours());
+
+		} else if diff.num_minutes() > 0 {
+
+			return format!("{}m", diff.num_minutes());
+
+		} else {
+
+			return format!("{}s", diff.num_seconds());
+
+		}
 
 	}
 
