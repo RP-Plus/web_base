@@ -74,3 +74,16 @@ macro_rules! http_success {
 			
 	};
 }
+
+#[macro_export]
+macro_rules! http_failure {
+	($json_message:expr) => {
+
+		HttpResponse::Ok()
+			.body(json!({
+				"successful": false,
+				"message": $json_message
+			}).to_string())
+			
+	};
+}
