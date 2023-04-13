@@ -1,6 +1,7 @@
 
 use lettre::transport::smtp::authentication::Credentials;
 use lettre::{Message, AsyncSmtpTransport, AsyncTransport, Tokio1Executor};
+use lettre::message::header::{ContentType};
 use crate::settings;
 
 pub async fn send_support_email(to_email: &str, subject: &str, body: &str) {
@@ -9,6 +10,7 @@ pub async fn send_support_email(to_email: &str, subject: &str, body: &str) {
 		.from(format!("<{}>", settings::get("support_email_username")).parse().unwrap())
 		.to(format!("<{}>", to_email).parse().unwrap())
 		.subject(subject)
+		.header(ContentType::TEXT_HTML)
 		.body(body.to_string())
 		.unwrap();
 
@@ -34,6 +36,7 @@ pub async fn send_no_reply_email(to_email: &str, subject: &str, body: &str) {
 		.from(format!("<{}>", settings::get("no_reply_email_username")).parse().unwrap())
 		.to(format!("<{}>", to_email).parse().unwrap())
 		.subject(subject)
+		.header(ContentType::TEXT_HTML)
 		.body(body.to_string())
 		.unwrap();
 
